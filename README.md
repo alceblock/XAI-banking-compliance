@@ -1,1 +1,13 @@
 # XAI-banking-compliance
+
+This project develops an Explainable AI (XAI) auditing framework to address the lack of transparency in deep learning models. While complex deep learning architectures achieve high classification throughput, their "black-box" nature presents a critical challenge in real-world scenarios, as it not only makes it complex for engineers to "read" the model, but also potentially undermines stakeholder trust, regulatory governance, and error-correction routines. This repository demonstrates how to bridge that gap by deploying multi-modal visual interpretation pipelines and an inherently transparent surrogate model to mathematically map and audit network decisions.
+
+The system establishes a thorough diagnostics and interpretability infrastructure built entirely in PyTorch and Scikit-Learn:
+* **Targeted Architecture Customization:** Fine-tuning a pre-trained `DenseNet-121` backbone, modifying its final layer into a 10-class linear classification block, and adapting single-channel grayscale MNIST data to a standardized 3-channel (`RGB`) 224x224 input space matching ImageNet normalization metrics.
+* **Granular Confidence Stratification:** Programming an automated `evaluate_model` layer that integrates continuous Softmax probability indexing to isolate exactly 5 perfectly predicted (`correct_samples`) and 5 misclassified (`wrong_samples`) configurations to benchmark model certainty alongside explainability indicators.
+* **Multi-Modal Visual Explanations:** Engineering a visual saliency matrix incorporating `Grad-CAM` leveraging final-block activations (`norm5`) to capture target localized gradients, coupled with a `LIME` image explainer, `SHAP` (GradientExplainer) mapping pixel-level Shapley reward values, Captum's `Integrated Gradients`, and customizable sliding-window `Occlusion Maps`.
+* **Inherently Transparent Surrogate System:** Designing a fully explainable, mathematically verifiable baseline by implementing custom spatial engineering (`extract_quadrant_features`) to map mathematical pixel densities across 4 distinct spatial quadrants (`Q1-Q4`), training a bounded `DecisionTree` to visualize explicit chat-free sequential decision paths and node-splitting indicators.
+
+Final telemetry audits prove the high-fidelity operation of the network (surpassing 99.1% test accuracy), while visual heatmaps mathematically trace errors to fine stroke similarities (e.g., misinterpreting an incomplete '2' as a '7'), proving that model errors arise from real ambiguous traits. The architecture offers an audit-ready methodology for transparent risk mitigation in ML systems by successfully mapping the performance-interpretability trade-off.
+
+To see more, extended explanation in the project.
